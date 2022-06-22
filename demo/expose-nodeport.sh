@@ -3,7 +3,7 @@ set -auo pipefail
 # shellcheck disable=SC1091
 source .env
 
-kubectl apply -f <<EOF
+kubectl apply -f - <<EOF
 apiVersion: v1
 kind: Service
 metadata:
