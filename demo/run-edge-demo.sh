@@ -12,6 +12,9 @@ IMAGE_PULL_POLICY="${IMAGE_PULL_POLICY:-Always}"
 SIDECAR_LOG_LEVEL="${SIDECAR_LOG_LEVEL:-error}"
 TIMEOUT="${TIMEOUT:-300s}"
 
+# clean up
+./demo/clean-kubernetes.sh
+
 osm install \
     --mesh-name "$MESH_NAME" \
     --osm-namespace "$K8S_NAMESPACE" \
@@ -31,3 +34,15 @@ osm install \
     --set=osm.sidecarLogLevel="$SIDECAR_LOG_LEVEL" \
     --set=osm.controllerLogLevel="trace" \
     --set=osm.sidecarImage="flomesh/pipy-nightly:latest" \
+
+# enable permissive traffic mode
+./scripts/mesh-enable-permissive-traffic-mode.sh
+# exclude eureka, config server port from sidecar traffic intercept
+./scripts/mesh-port-exclusion.sh
+# create app namespace and involve it in mesh
+./demo/configure-app-namespace.sh
+# deploy app
+./demo/deploy-app.sh
+# deploy ingress
+./demo/deploy-ingress-nginx.sh
+# ./demo/deploy-ingress-pipy.sh

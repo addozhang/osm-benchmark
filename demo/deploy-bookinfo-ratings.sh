@@ -46,7 +46,13 @@ spec:
       containers:
       - image: flomesh/samples-bookinfo-ratings:latest
         name: app
-        resources: {}
+        resources: 
+          requests:
+            cpu: 1
+            memory: 2Gi
+          limits:
+            cpu: 2
+            memory: 4Gi
         ports:
           - containerPort: 8101        
         env:
@@ -55,7 +61,7 @@ spec:
           - name: K8S_SAMPLES_DISCOVERY_SERVER_PORT
             value: "8761"
           - name: JAVA_OPTS
-            value: "-Xms2g -Xmx4g" 
+            value: "-Xmx4g -Xms2g"
           - name: DISCOVERY_PREFER_VIP_ADDRESS
             value: "true"
           - name: SERVICE_NAME

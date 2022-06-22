@@ -68,7 +68,13 @@ spec:
       containers:
       - image: flomesh/samples-api-gateway:latest
         name: app
-        resources: {}
+        resources: 
+          requests:
+            cpu: 1
+            memory: 2Gi
+          limits:
+            cpu: 2
+            memory: 4Gi
         ports:
           - containerPort: 10000   
         env:

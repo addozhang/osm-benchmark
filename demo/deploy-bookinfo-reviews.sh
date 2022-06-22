@@ -46,7 +46,13 @@ spec:
       containers:
       - image: flomesh/samples-bookinfo-reviews:latest
         name: app
-        resources: {}
+        resources: 
+          requests:
+            cpu: 1
+            memory: 2Gi
+          limits:
+            cpu: 2
+            memory: 4Gi
         ports:
           - containerPort: 8102      
         env:

@@ -5,9 +5,11 @@ source .env
 
 ./demo/deploy-discovery-server.sh
 ./demo/deploy-config-service.sh
+# wait config server's registration
+sleep 30
 ./demo/deploy-gateway.sh
-./demo/deploy-bookinfo-details.sh
-./demo/deploy-bookinfo-productpage.sh
+# ./demo/deploy-bookinfo-details.sh
+# ./demo/deploy-bookinfo-productpage.sh
 ./demo/deploy-bookinfo-ratings.sh
 ./demo/deploy-bookinfo-reviews.sh
 
