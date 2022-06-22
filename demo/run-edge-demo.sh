@@ -15,6 +15,11 @@ TIMEOUT="${TIMEOUT:-300s}"
 # clean up
 ./demo/clean-kubernetes.sh
 
+# delete previous download
+rm -rf ./Linux-amd64 ./linux-amd64
+curl -L https://github.com/flomesh-io/osm-edge/releases/download/v1.1.0/osm-edge-v1.1.0-linux-amd64.tar.gz | tar -vxzf -
+cp ./linux-amd64/osm /usr/local/bin/osm
+
 osm install \
     --mesh-name "$MESH_NAME" \
     --osm-namespace "$K8S_NAMESPACE" \
