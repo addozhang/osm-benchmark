@@ -16,7 +16,7 @@ TIMEOUT="${TIMEOUT:-300s}"
 rm -rf ./Linux-amd64 ./linux-amd64
 
 release=v1.1.0
-curl -L https://github.com/openservicemesh/osm/releases/download/${release}/osm-${release}-linux-amd64.tar.gz | tar -vxzf -
+curl -sL https://github.com/openservicemesh/osm/releases/download/${release}/osm-${release}-linux-amd64.tar.gz | tar -vxzf -
 cp ./linux-amd64/osm /usr/local/bin/osm
 
 osm install \
@@ -39,6 +39,8 @@ osm install \
 ./scripts/mesh-enable-permissive-traffic-mode.sh
 # exclude eureka, config server port from sidecar traffic intercept
 ./scripts/mesh-port-exclusion.sh
+# change cpu limit of sidecar resources
+./scripts/mesh-sidecar-resources.sh
 # create app namespace and involve it in mesh
 ./demo/configure-app-namespace.sh
 # deploy app

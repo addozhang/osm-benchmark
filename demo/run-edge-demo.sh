@@ -17,7 +17,7 @@ TIMEOUT="${TIMEOUT:-300s}"
 
 # delete previous download
 rm -rf ./Linux-amd64 ./linux-amd64
-curl -L https://github.com/flomesh-io/osm-edge/releases/download/v1.1.0/osm-edge-v1.1.0-linux-amd64.tar.gz | tar -vxzf -
+curl -sL https://github.com/flomesh-io/osm-edge/releases/download/v1.1.0/osm-edge-v1.1.0-linux-amd64.tar.gz | tar -vxzf -
 cp ./linux-amd64/osm /usr/local/bin/osm
 
 osm install \
@@ -44,6 +44,8 @@ osm install \
 ./scripts/mesh-enable-permissive-traffic-mode.sh
 # exclude eureka, config server port from sidecar traffic intercept
 ./scripts/mesh-port-exclusion.sh
+# change cpu limit of sidecar resources
+./scripts/mesh-sidecar-resources.sh
 # create app namespace and involve it in mesh
 ./demo/configure-app-namespace.sh
 # deploy app

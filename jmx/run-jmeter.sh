@@ -16,14 +16,23 @@ RATING_PATH=/ratings/2099a055-1e21-46ef-825e-9e0de93554ea
 INGRESS_PORT=80
 HOST=192.168.10.71
 
-THREAD_COUND=200
-DURATION=60
+THREAD_COUNT=200
+DURATION=300
 RESULT_PATH=~/jmeter-results
 
 ## warming
+# echo "warming up"
+# jmeter -Jthread.count="${THREAD_COUNT}" -Jthread.duration="10" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${GATEWAY_RATINGS_PATH}" -n -t bookinfo.jmx > /dev/null
+
+# sleep 120s
+
+# testing start
+ts=`date '+%Y-%m-%d-%H-%M-%S'`
+echo "start at $ts"
+jmeter -Jthread.count="${THREAD_COUNT}" -Jthread.duration="${DURATION}" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${RATING_PATH}" -n -t bookinfo.jmx -l "${RESULT_PATH}"/ingress-ratings-c"${THREAD_COUNT}"-d"${DURATION}"-"${ts}".jtl
+
+# sleep 120s
 
 ts=`date '+%Y-%m-%d-%H-%M-%S'`
-jmeter -Jthread.cound="${THREAD_COUND}" -Jthread.duration="${DURATION}" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${RATING_PATH}" -n -t bookinfo.jmx -l "${RESULT_PATH}"/ingress-ratings-"${ts}".jtl
-
-ts=`date '+%Y-%m-%d-%H-%M-%S'`
-jmeter -Jthread.cound="${THREAD_COUND}" -Jthread.duration="${DURATION}" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${GATEWAY_RATINGS_PATH}" -n -t bookinfo.jmx -l "${RESULT_PATH}"/ingress-gateway-ratings-"${ts}".jtl
+echo "start at $ts"
+jmeter -Jthread.count="${THREAD_COUNT}" -Jthread.duration="${DURATION}" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${GATEWAY_RATINGS_PATH}" -n -t bookinfo.jmx -l "${RESULT_PATH}"/ingress-gateway-ratings-c"${THREAD_COUNT}"-d"${DURATION}"-"${ts}".jtl

@@ -11,7 +11,7 @@ sleep 30
 # ./demo/deploy-bookinfo-details.sh
 # ./demo/deploy-bookinfo-productpage.sh
 ./demo/deploy-bookinfo-ratings.sh
-./demo/deploy-bookinfo-reviews.sh
+# ./demo/deploy-bookinfo-reviews.sh
 
 sleep 10
 kubectl wait --namespace $DEMO_NAMESPACE \
