@@ -11,14 +11,14 @@ MESH_NAME="${MESH_NAME:-osm-edge}"
 IMAGE_PULL_POLICY="${IMAGE_PULL_POLICY:-Always}"
 SIDECAR_LOG_LEVEL="${SIDECAR_LOG_LEVEL:-error}"
 TIMEOUT="${TIMEOUT:-300s}"
-
+ARCH=$(dpkg --print-architecture)
 # clean up
 ./demo/clean-kubernetes.sh
 
 # delete previous download
-rm -rf ./Linux-amd64 ./linux-amd64
-curl -sL https://github.com/flomesh-io/osm-edge/releases/download/v1.1.0/osm-edge-v1.1.0-linux-amd64.tar.gz | tar -vxzf -
-cp ./linux-amd64/osm /usr/local/bin/osm
+rm -rf ./Linux-$ARCH ./linux-$ARCH
+curl -sL https://github.com/flomesh-io/osm-edge/releases/download/v1.1.0/osm-edge-v1.1.0-linux-$ARCH.tar.gz | tar -vxzf -
+cp ./linux-$ARCH/osm /usr/local/bin/osm
 
 osm install \
     --mesh-name "$MESH_NAME" \
