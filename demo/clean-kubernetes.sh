@@ -16,6 +16,6 @@ helm uninstall ingress-nginx -n "$nginx_ingress_namespace" || true
 # delete demo namespace
 kubectl delete ns "$DEMO_NAMESPACE" || true
 # uninstall osm
-osm uninstall mesh -f --mesh-name "$MESH_NAME" --osm-namespace "$K8S_NAMESPACE" --delete-namespace -a
+osm uninstall mesh -f --mesh-name "$MESH_NAME" --osm-namespace "$K8S_NAMESPACE" --delete-namespace -a || true
 
 wait

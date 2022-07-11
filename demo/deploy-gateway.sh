@@ -73,7 +73,7 @@ spec:
             cpu: 1
             memory: 2Gi
           limits:
-            cpu: 2
+            cpu: 4
             memory: 4Gi
         ports:
           - containerPort: 10000   

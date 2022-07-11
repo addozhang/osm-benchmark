@@ -3,8 +3,8 @@
 set -aueo pipefail
 source .env
 
-CTR_REGISTRY=flomesh
-CTR_TAG=latest
+CTR_REGISTRY="${CTR_REGISTRY:-flomesh}"
+CTR_TAG="${CTR_TAG:-latest}"
 
 K8S_NAMESPACE="${K8S_NAMESPACE:-osm-edge-system}"
 MESH_NAME="${MESH_NAME:-osm-edge}"
