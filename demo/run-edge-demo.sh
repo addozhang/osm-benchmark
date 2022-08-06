@@ -37,8 +37,7 @@ osm install \
     --set=osm.enableFluentbit="false" \
     --set=osm.deployPrometheus="false" \
     --set=osm.sidecarLogLevel="$SIDECAR_LOG_LEVEL" \
-    --set=osm.controllerLogLevel="trace" \
-    --set=osm.sidecarImage="flomesh/pipy-nightly:latest" \
+    --set=osm.controllerLogLevel="trace"
 
 # enable permissive traffic mode
 ./scripts/mesh-enable-permissive-traffic-mode.sh
