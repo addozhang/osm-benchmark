@@ -70,10 +70,10 @@ spec:
         name: app
         resources: 
           requests:
-            cpu: 1
+            cpu: 4
             memory: 2Gi
           limits:
-            cpu: 4
+            cpu: 6
             memory: 4Gi
         ports:
           - containerPort: 10000   
@@ -86,6 +86,8 @@ spec:
             value: "-Xms2g -Xmx4g" 
           - name: DISCOVERY_PREFER_VIP_ADDRESS
             value: "true"
+          - name: zuul.semaphore.maxSemaphores
+            value: "200"
           - name: SERVICE_NAME
             valueFrom:
               fieldRef:
