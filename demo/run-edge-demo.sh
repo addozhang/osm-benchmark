@@ -17,8 +17,8 @@ ARCH=$(dpkg --print-architecture)
 
 # delete previous download
 rm -rf ./Linux-$ARCH ./linux-$ARCH
-curl -sL https://github.com/flomesh-io/osm-edge/releases/download/v1.1.0/osm-edge-v1.1.0-linux-$ARCH.tar.gz | tar -vxzf -
-cp ./linux-$ARCH/osm /usr/local/bin/osm
+curl -sL https://github.com/flomesh-io/osm-edge/releases/download/v1.2.0/osm-edge-v1.2.0-linux-$ARCH.tar.gz | tar -vxzf -
+sudo cp ./linux-$ARCH/osm /usr/local/bin/osm
 
 osm install \
     --mesh-name "$MESH_NAME" \
