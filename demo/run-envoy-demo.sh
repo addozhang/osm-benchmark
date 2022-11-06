@@ -18,7 +18,7 @@ rm -rf ./Linux-$ARCH ./linux-$ARCH
 
 release=v1.1.0
 curl -sL https://github.com/openservicemesh/osm/releases/download/${release}/osm-${release}-linux-$ARCH.tar.gz | tar -vxzf -
-cp ./linux-$ARCH/osm /usr/local/bin/osm
+sudo cp ./linux-$ARCH/osm /usr/local/bin/osm
 
 osm install \
     --mesh-name "$MESH_NAME" \
