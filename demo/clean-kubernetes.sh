@@ -20,4 +20,6 @@ osm uninstall mesh -f --mesh-name "$MESH_NAME" --osm-namespace "$K8S_NAMESPACE" 
 # uninstall linkerd
 linkerd viz uninstall | kubectl delete -f - || true
 linkerd uninstall | kubectl delete -f - || true
+# uninstall istio
+istioctl uninstall --purge -y || true
 wait

@@ -43,6 +43,8 @@ spec:
         type: infra
       annotations:
         openservicemesh.io/sidecar-injection: disabled
+        sidecar.istio.io/inject: disabled
+        linkerd.io/inject: disabled
     spec:
       containers:
       - image: flomesh/samples-discovery-server:latest

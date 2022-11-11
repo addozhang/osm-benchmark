@@ -3,12 +3,13 @@
 set -aueo pipefail
 source .env
 
-echo "Which demo do you want to install?"
-echo "1 - bookinfo"
-echo "2 - dubbo"
-echo ""
-echo "Make your selection: "
-read demo;
+# echo "Which demo do you want to install?"
+# echo "1 - bookinfo"
+# echo "2 - dubbo"
+# echo ""
+# echo "Make your selection: "
+# read demo;
+demo=$DEMO_TYPE
 case $demo in
   1) echo "installing bookinfo demo";
      ./demo/deploy-discovery-server.sh;

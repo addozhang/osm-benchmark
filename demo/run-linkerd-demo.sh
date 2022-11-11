@@ -4,8 +4,8 @@ set -aueo pipefail
 source .env
 
 #install linkerd cli
-curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | sh
-export PATH=$PATH:$HOME/.linkerd2/bin
+curl --proto '=https' --tlsv1.2 -sSfL https://run.linkerd.io/install | LINKERD2_VERSION=$LINKERD2_VERSION sh
+sudo cp $HOME/.linkerd2/bin/linkerd /usr/local/bin/linkerd
 linkerd version
 
 # clean up
@@ -15,11 +15,16 @@ linkerd version
 linkerd install --crds | kubectl apply -f -
 linkerd install | kubectl apply -f -
 
+sleep 5
+kubectl wait --namespace linkerd \
+  --for=condition=ready pod \
+  --selector=linkerd.io/control-plane-ns=linkerd \
+  --timeout=600s  
+
 # create namespace
 kubectl create namespace "$DEMO_NAMESPACE" --save-config
+kubectl annotate namespace "$DEMO_NAMESPACE" linkerd.io/inject=enabled
 # deploy app
 ./demo/deploy-app.sh
 # deploy ingress
 ./demo/deploy-ingress-nginx.sh
-
-kubectl get -n "$DEMO_NAMESPACE" deploy samples-api-gateway samples-bookinfo-ratings -o yaml | linkerd inject - | kubectl apply -f -

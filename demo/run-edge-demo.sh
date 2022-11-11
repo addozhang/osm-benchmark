@@ -17,7 +17,7 @@ ARCH=$(dpkg --print-architecture)
 
 # delete previous download
 rm -rf ./Linux-$ARCH ./linux-$ARCH
-curl -sL https://github.com/flomesh-io/osm-edge/releases/download/v1.2.0/osm-edge-v1.2.0-linux-$ARCH.tar.gz | tar -vxzf -
+curl -sL https://github.com/flomesh-io/osm-edge/releases/download/$OSM_EDGE_VERSION/osm-edge-$OSM_EDGE_VERSION-linux-$ARCH.tar.gz | tar -vxzf -
 sudo cp ./linux-$ARCH/osm /usr/local/bin/osm
 
 osm install \
@@ -25,8 +25,6 @@ osm install \
     --osm-namespace "$K8S_NAMESPACE" \
     --verbose \
     --set=osm.enablePermissiveTrafficPolicy=true \
-    --set=osm.image.registry="$CTR_REGISTRY" \
-    --set=osm.image.tag="$CTR_TAG" \
     --set=osm.image.pullPolicy="$IMAGE_PULL_POLICY" \
     --set=osm.enableDebugServer="false" \
     --set=osm.enableEgress="false" \
@@ -50,5 +48,7 @@ osm install \
 # deploy app
 ./demo/deploy-app.sh
 # deploy ingress
+osm namespace add "$INGRESS_NAMESPACE" --mesh-name "$MESH_NAME" --disable-sidecar-injection
 ./demo/deploy-ingress-nginx.sh
 # ./demo/deploy-ingress-pipy.sh
+./demo/configure-ingressbackend.sh

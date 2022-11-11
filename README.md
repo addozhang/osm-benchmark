@@ -81,7 +81,7 @@ Execute script:
 
 ```shell
 # osm-benchmark/jmx
-./run-jmeter.sh
+./run-jmeter.sh <edge/linkerd/istio/osm>
 ```
 
 Short description for benchmark process:
