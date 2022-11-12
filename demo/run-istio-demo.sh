@@ -23,7 +23,7 @@ kubectl wait --namespace istio-system \
   --timeout=600s  
 
 # create namespace
-kubectl create namespace "$DEMO_NAMESPACE" --save-config
+./demo/configure-app-namespace.sh
 # mesh namespace
 kubectl label namespace "$DEMO_NAMESPACE" istio-injection=enabled
 # deploy app

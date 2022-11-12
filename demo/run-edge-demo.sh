@@ -4,7 +4,7 @@ set -aueo pipefail
 source .env
 
 CTR_REGISTRY="${CTR_REGISTRY:-flomesh}"
-CTR_TAG="${CTR_TAG:-latest}"
+CTR_TAG="${CTR_TAG:-$OSM_EDGE_VERSION}"
 
 K8S_NAMESPACE="${K8S_NAMESPACE:-osm-edge-system}"
 MESH_NAME="${MESH_NAME:-osm-edge}"
@@ -17,7 +17,7 @@ ARCH=$(dpkg --print-architecture)
 
 # delete previous download
 rm -rf ./Linux-$ARCH ./linux-$ARCH
-curl -sL https://github.com/flomesh-io/osm-edge/releases/download/$OSM_EDGE_VERSION/osm-edge-$OSM_EDGE_VERSION-linux-$ARCH.tar.gz | tar -vxzf -
+curl -sL https://github.com/flomesh-io/osm-edge/releases/download/v$OSM_EDGE_VERSION/osm-edge-$OSM_EDGE_VERSION-linux-v$ARCH.tar.gz | tar -vxzf -
 sudo cp ./linux-$ARCH/osm /usr/local/bin/osm
 
 osm install \
@@ -36,6 +36,10 @@ osm install \
     --set=osm.deployPrometheus="false" \
     --set=osm.sidecarLogLevel="$SIDECAR_LOG_LEVEL" \
     --set=osm.controllerLogLevel="trace"
+#     --set=osm.image.registry="$CTR_REGISTRY" \
+#     --set=osm.image.tag="$CTR_TAG" \
+#     --set=osm.sidecarImage="flomesh/pipy-nightly:202211101057" \
+#     --set=osm.pipyRepoImage="flomesh/pipy-repo:0.70.0-24" \
 
 # enable permissive traffic mode
 ./scripts/mesh-enable-permissive-traffic-mode.sh
@@ -45,6 +49,10 @@ osm install \
 ./scripts/mesh-sidecar-resources.sh
 # create app namespace and involve it in mesh
 ./demo/configure-app-namespace.sh
+# Add namespace to mesh
+osm namespace add --mesh-name "$MESH_NAME" "$DEMO_NAMESPACE"
+# Enable metrics on namespace
+osm metrics enable --namespace "$DEMO_NAMESPACE"
 # deploy app
 ./demo/deploy-app.sh
 # deploy ingress

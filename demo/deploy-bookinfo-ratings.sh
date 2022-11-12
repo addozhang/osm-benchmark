@@ -19,6 +19,23 @@ spec:
   selector:
     app: samples-bookinfo-ratings
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: samples-bookinfo-ratings 
+  name: samples-bookinfo-ratings-node
+  namespace: $DEMO_NAMESPACE
+spec:
+  type: NodePort
+  ports:
+  - port: 8101
+    protocol: TCP
+    targetPort: 8101
+    nodePort: 30101
+  selector:
+    app: samples-bookinfo-ratings
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:

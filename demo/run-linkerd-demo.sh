@@ -22,7 +22,7 @@ kubectl wait --namespace linkerd \
   --timeout=600s  
 
 # create namespace
-kubectl create namespace "$DEMO_NAMESPACE" --save-config
+./demo/configure-app-namespace.sh
 kubectl annotate namespace "$DEMO_NAMESPACE" linkerd.io/inject=enabled
 # deploy app
 ./demo/deploy-app.sh

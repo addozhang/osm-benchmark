@@ -44,6 +44,10 @@ osm install \
 ./scripts/mesh-sidecar-resources.sh
 # create app namespace and involve it in mesh
 ./demo/configure-app-namespace.sh
+# Add namespace to mesh
+osm namespace add --mesh-name "$MESH_NAME" "$DEMO_NAMESPACE"
+# Enable metrics on namespace
+osm metrics enable --namespace "$DEMO_NAMESPACE"
 # deploy app
 ./demo/deploy-app.sh
 # deploy ingress
