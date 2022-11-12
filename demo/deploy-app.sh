@@ -6,6 +6,7 @@ source .env
 # echo "Which demo do you want to install?"
 # echo "1 - bookinfo"
 # echo "2 - dubbo"
+# echo "3 - emojivoto"
 # echo ""
 # echo "Make your selection: "
 # read demo;
@@ -26,6 +27,9 @@ case $demo in
      ./demo/deploy-echo-dubbo-server.sh;
      ./demo/deploy-echo-dubbo-consumer.sh;
      ;;
+  3) echo "install emojivoto";
+    ./demo/deploy-emojivoto.sh;
+    ;;
   *) echo "unknown selection"; exit 1 ;;
 esac
 
