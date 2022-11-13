@@ -6,14 +6,14 @@ source .env
 export PATH=$HOME/apache-jmeter-5.5/bin:$PATH
 case $DEMO_TYPE in
   1) echo "run benchmark for spring cloud bookinfo";
-    FULL_PATH=/bookinfo-ratings/ratings/2099a055-1e21-46ef-825e-9e0de93554ea;
+    # FULL_PATH=/bookinfo-ratings/ratings/2099a055-1e21-46ef-825e-9e0de93554ea;
     SINGLE_PATH=/ratings/2099a055-1e21-46ef-825e-9e0de93554ea;
     ;;
   2) echo "run benchmark for dubbo samples";
     ;;
   3) echo "run benchmark for linkerd emojiviot";
-    FULL_PATH=/emoji/leaderboard;
-    SINGLE_PATH=/emoji/api/vote?choice=:nerd_face:;
+    FULL_PATH=/emoji/api/list;
+    # SINGLE_PATH=/emoji/api/vote?choice=:nerd_face:;
     ;;
   4) echo "run benchmark for istio bookinfo";
     FULL_PATH=/productpage?u=test;
@@ -46,7 +46,7 @@ if [[ -v FULL_PATH ]]; then
 fi
 # warming
 echo "warming up" 
-jmeter -Jthread.count="100" -Jthread.duration="30" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${FULL_PATH}" -n -t jmx/bookinfo.jmx
+jmeter -Jthread.count="100" -Jthread.duration="30" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${FULL_PATH:-${SINGLE_PATH}}" -n -t jmx/bookinfo.jmx
 
 # testing start
 if [[ -v SINGLE_PATH ]]; then

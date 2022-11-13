@@ -102,7 +102,11 @@ Among these steps, there is 2 mins cooling down gap, and at last the test summar
 
 Execult the script `./benchmark.sh` will install mesh, deploy apps and run benchmark automatically.
 
-Please refer to [`benchmark.sh`](./benchmark.sh) for more details.
+Please refer to [`benchmark.sh`](./benchmark.sh) for more details. Run benchmark as bellow:
+
+```
+DEMO_TYPE=1 CONCURRENCY_COUNT=1000 DURATION=120 COOLDOWN_TIME=60 ./benchmark.sh
+```
 
 ### Check resource consumption
 
