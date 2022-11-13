@@ -13,6 +13,7 @@ DETAILS_SERVICE="samples-bookinfo-details"
 REVIEWS_SERVICE="samples-bookinfo-reviews"
 RATINGS_SERVICE="samples-bookinfo-ratings"
 EMOJIVOTO_SERVICE="web-svc"
+PRODUCTPAGE_SERVICE="productpage"
 
 
 helm upgrade --install ingress-nginx ingress-nginx \
@@ -64,6 +65,13 @@ spec:
             name: $EMOJIVOTO_SERVICE
             port:
               number: 80
+      - path: /productpage
+        pathType: Prefix
+        backend:
+          service:
+            name: $PRODUCTPAGE_SERVICE
+            port:
+              number: 9080              
       - path: /
         pathType: Prefix
         backend:
