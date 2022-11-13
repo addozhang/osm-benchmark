@@ -12,6 +12,7 @@ GATEWAY_SERVICE="samples-api-gateway"
 DETAILS_SERVICE="samples-bookinfo-details"
 REVIEWS_SERVICE="samples-bookinfo-reviews"
 RATINGS_SERVICE="samples-bookinfo-ratings"
+EMOJIVOTO_SERVICE="web-svc"
 
 
 helm upgrade --install ingress-nginx ingress-nginx \
@@ -56,6 +57,13 @@ spec:
             name: $RATINGS_SERVICE
             port:
               number: 8101
+      - path: /emoji
+        pathType: Prefix
+        backend:
+          service:
+            name: $EMOJIVOTO_SERVICE
+            port:
+              number: 80
       - path: /
         pathType: Prefix
         backend:
