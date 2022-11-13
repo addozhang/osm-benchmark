@@ -56,7 +56,7 @@ osm metrics enable --namespace "$DEMO_NAMESPACE"
 # deploy app
 ./demo/deploy-app.sh
 # deploy ingress
-osm namespace add "$INGRESS_NAMESPACE" --mesh-name "$MESH_NAME" --disable-sidecar-injection
 ./demo/deploy-ingress-nginx.sh
+osm namespace add "$INGRESS_NAMESPACE" --mesh-name "$MESH_NAME" --disable-sidecar-injection
 # ./demo/deploy-ingress-pipy.sh
 ./demo/configure-ingressbackend.sh

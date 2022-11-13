@@ -12,6 +12,7 @@ GATEWAY_SERVICE="samples-api-gateway"
 DETAILS_SERVICE="samples-bookinfo-details"
 REVIEWS_SERVICE="samples-bookinfo-reviews"
 RATINGS_SERVICE="samples-bookinfo-ratings"
+EMOJIVOTO_SERVICE="web-svc"
 
 kubectl apply -f - <<EOF
 kind: IngressBackend
@@ -32,6 +33,10 @@ spec:
   - name: $RATINGS_SERVICE
     port:
       number: 8101
+      protocol: http
+  - name: $EMOJIVOTO_SERVICE
+    port:
+      number: 80
       protocol: http
   - name: $GATEWAY_SERVICE
     port:
