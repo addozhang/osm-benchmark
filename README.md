@@ -38,7 +38,7 @@ kubectl get secret --namespace metrics grafana -o jsonpath="{.data.admin-passwor
 
 ### Update .env setting
 
-For osm-edge and osm, set `MESH_ENABLED=true`, and set it as `false` for Linkerd.
+Refer to [`.env`](./.env) file, there are plenty of setting entry, such as demo app types, etc.
 
 ## Run demo
 
@@ -81,7 +81,7 @@ cd jmx
 ./setup.sh
 ```
 
-### Run benchmark
+### Run standlone benchmark
 
 Execute script:
 
@@ -97,6 +97,12 @@ Short description for benchmark process:
 3. Then, request `ingress-gateway-ratings` for 5 mins.
 
 Among these steps, there is 2 mins cooling down gap, and at last the test summary and results (jtl) can be located in directory `$HOME/jmeter-results`.
+
+### Run batch benchmark
+
+Execult the script `./benchmark.sh` will install mesh, deploy apps and run benchmark automatically.
+
+Please refer to [`benchmark.sh`](./benchmark.sh) for more details.
 
 ### Check resource consumption
 
