@@ -228,9 +228,3 @@ spec:
             cpu: 100m
       serviceAccountName: web
 EOF
-
-sleep 5
-kubectl wait --namespace $DEMO_NAMESPACE \
-  --for=condition=ready pod \
-  --selector=app=web-svc \
-  --timeout=600s

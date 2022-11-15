@@ -36,7 +36,7 @@ spec:
       protocol: http
   - name: $EMOJIVOTO_SERVICE
     port:
-      number: 80
+      number: 8080
       protocol: http
   - name: $GATEWAY_SERVICE
     port:
