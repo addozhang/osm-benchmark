@@ -13,22 +13,16 @@ source .env
 demo=$DEMO_TYPE
 case $demo in
   1) echo "installing bookinfo demo";
-     ./demo/deploy-discovery-server.sh;
-     ./demo/deploy-config-service.sh;
-     # wait config server's registration
-     sleep 30;
-     ./demo/deploy-gateway.sh;
-      # ./demo/deploy-bookinfo-details.sh
-      # ./demo/deploy-bookinfo-productpage.sh
-     ./demo/deploy-bookinfo-ratings.sh;
-      # ./demo/deploy-bookinfo-reviews.sh
+     ./demo/deploy-sc-bookinfo.sh;
     ;;
   2) echo "installing dubbo demo";
-     ./demo/deploy-echo-dubbo-server.sh;
-     ./demo/deploy-echo-dubbo-consumer.sh;
+     ./demo/deploy-dubbo;
      ;;
   3) echo "install emojivoto";
     ./demo/deploy-emojivoto.sh;
+    ;;
+  4) echo "install bookinfo";
+    ./demo/deploy-bookinfo.sh;
     ;;
   *) echo "unknown selection"; exit 1 ;;
 esac
@@ -36,5 +30,5 @@ esac
 sleep 5
 kubectl wait --namespace $DEMO_NAMESPACE \
   --for=condition=ready pod \
-  --selector=type=app \
+  --all \
   --timeout=600s
