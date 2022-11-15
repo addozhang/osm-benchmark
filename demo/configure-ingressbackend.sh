@@ -13,6 +13,8 @@ DETAILS_SERVICE="samples-bookinfo-details"
 REVIEWS_SERVICE="samples-bookinfo-reviews"
 RATINGS_SERVICE="samples-bookinfo-ratings"
 EMOJIVOTO_SERVICE="web-svc"
+PRODUCTPAGE_SERVICE="productpage"
+FORTIO_SERVICE="fortio"
 
 kubectl apply -f - <<EOF
 kind: IngressBackend
@@ -38,11 +40,18 @@ spec:
     port:
       number: 8080
       protocol: http
+  - name: $PRODUCTPAGE_SERVICE
+    port:
+      number: 9080
+      protocol: http
+  - name: $FORTIO_SERVICE
+    port:
+      number: 8080
+      protocol: http            
   - name: $GATEWAY_SERVICE
     port:
       number: 10000
       protocol: http
-  sources:
   sources:
   - kind: Service
     namespace: "$nginx_ingress_namespace"

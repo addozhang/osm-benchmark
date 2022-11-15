@@ -3,6 +3,8 @@
 set -aueo pipefail
 source .env
 
+CPU=${CPU:-1}
+
 #install linkerd cli
 if [ ! command -v linkerd &> /dev/null ] || [ ! "$(printf '%s' "$LINKERD2_VERSION")" = $(linkerd version | head -n1 | cut -d":" -f2) ]
 then
@@ -19,7 +21,7 @@ fi
 
 # install linkerd
 linkerd install --crds | kubectl apply -f -
-linkerd install | kubectl apply -f -
+linkerd install --proxy-cpu-limit $CPU | kubectl apply -f -
 
 sleep 5
 kubectl wait --namespace linkerd \

@@ -35,11 +35,11 @@ osm install \
     --set=osm.enableFluentbit="false" \
     --set=osm.deployPrometheus="false" \
     --set=osm.sidecarLogLevel="$SIDECAR_LOG_LEVEL" \
-    --set=osm.controllerLogLevel="trace"
-#     --set=osm.image.registry="$CTR_REGISTRY" \
-#     --set=osm.image.tag="$CTR_TAG" \
-#     --set=osm.sidecarImage="flomesh/pipy-nightly:202211101057" \
-#     --set=osm.pipyRepoImage="flomesh/pipy-repo:0.70.0-24" \
+    --set=osm.controllerLogLevel="trace" \
+    --set=osm.image.registry="$CTR_REGISTRY" \
+    --set=osm.image.tag="$CTR_TAG" \
+    --set=osm.sidecarImage="flomesh/pipy-nightly:202211101057" \
+    --set=osm.pipyRepoImage="flomesh/pipy-repo-nightly:latest" \
 
 # enable permissive traffic mode
 ./scripts/mesh-enable-permissive-traffic-mode.sh

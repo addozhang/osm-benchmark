@@ -55,16 +55,21 @@ metadata:
   namespace: $DEMO_NAMESPACE
 spec:
   ingressClassName: nginx
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: $FORTIO_SERVICE
-            port:
-              number: 8080  
+  defaultBackend:
+    service:
+      name: $FORTIO_SERVICE
+      port:
+        number: 8080  
+  # rules:
+  # - http:
+  #     paths:
+  #     - path: /
+  #       pathType: Prefix
+  #       backend:
+  #         service:
+  #           name: $FORTIO_SERVICE
+  #           port:
+  #             number: 8080
 EOF
 else
 kubectl apply -f - <<EOF

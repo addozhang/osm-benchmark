@@ -38,4 +38,11 @@ spec:
         ports:
         - containerPort: 8080
           name: http-fortio
+        resources: 
+          requests:
+            cpu: 1
+            memory: 1Gi
+          limits:
+            cpu: 2
+            memory: 2Gi          
 EOF
