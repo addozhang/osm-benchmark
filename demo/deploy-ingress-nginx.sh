@@ -27,7 +27,26 @@ kubectl wait --namespace ingress-nginx \
   --selector=app.kubernetes.io/instance=ingress-nginx \
   --timeout=600s
 
-if [[ DEMO_TYPE -eq 5 ]]; then
+if [[ DEMO_TYPE -eq 3 ]]; then
+  echo "Creating ingress rule for Emojivoto\n";
+  kubectl apply -f - <<EOF
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  namespace: $DEMO_NAMESPACE
+  annotations:
+    nginx.ingress.kubernetes.io/service-upstream: "true"
+spec:
+  ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: $EMOJIVOTO_SERVICE
+      port:
+        number: 8080
+
+EOF
+elif [[ DEMO_TYPE -eq 5 ]]; then
 kubectl apply -f - <<EOF
 apiVersion: networking.k8s.io/v1
 kind: Ingress
