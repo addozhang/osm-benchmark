@@ -24,6 +24,9 @@ case $demo in
   4) echo "install bookinfo";
     ./demo/deploy-bookinfo.sh;
     ;;
+  5) echo "install fortio";
+    ./demo/deploy-fortio.sh;
+    ;;
   *) echo "unknown selection"; exit 1 ;;
 esac
 

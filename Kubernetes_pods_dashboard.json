@@ -3,7 +3,10 @@
     "list": [
       {
         "builtIn": 1,
-        "datasource": "-- Grafana --",
+        "datasource": {
+          "type": "datasource",
+          "uid": "grafana"
+        },
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
@@ -23,8 +26,7 @@
   "fiscalYearStartMonth": 0,
   "gnetId": 3146,
   "graphTooltip": 1,
-  "id": 15,
-  "iteration": 1654788615084,
+  "id": 1,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -33,7 +35,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "kVUwOUDVk"
+      },
       "editable": true,
       "error": false,
       "fill": 1,
@@ -52,7 +57,7 @@
         "alignAsTable": true,
         "avg": true,
         "current": true,
-        "max": false,
+        "max": true,
         "min": false,
         "rightSide": true,
         "show": true,
@@ -67,7 +72,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.2.2",
+      "pluginVersion": "9.2.4",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -77,6 +82,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "kVUwOUDVk"
+          },
           "exemplar": true,
           "expr": "sum by (container)( rate(container_cpu_usage_seconds_total{image!=\"\",container=~\"$container\",container!=\"POD\",pod=\"$pod\"}[1m] ) )",
           "interval": "",
@@ -87,9 +96,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "CPU Usage",
       "tooltip": {
         "msResolution": true,
@@ -99,33 +106,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -133,7 +131,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "kVUwOUDVk"
+      },
       "editable": true,
       "error": false,
       "fill": 1,
@@ -152,7 +153,7 @@
         "alignAsTable": true,
         "avg": true,
         "current": true,
-        "max": false,
+        "max": true,
         "min": false,
         "rightSide": true,
         "show": true,
@@ -167,7 +168,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.2.2",
+      "pluginVersion": "9.2.4",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -177,6 +178,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "kVUwOUDVk"
+          },
           "exemplar": true,
           "expr": "sum by(container) (container_memory_usage_bytes{pod=\"$pod\", container=~\"$container\", container!=\"POD\"})",
           "interval": "10s",
@@ -187,6 +192,10 @@
           "step": 10
         },
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "kVUwOUDVk"
+          },
           "expr": "kube_pod_container_resource_requests_memory_bytes{pod=\"$pod\", container=~\"$container\"}",
           "hide": true,
           "interval": "10s",
@@ -198,9 +207,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Memory Usage",
       "tooltip": {
         "msResolution": true,
@@ -210,33 +217,24 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "bytes",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     },
     {
@@ -244,7 +242,10 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "Prometheus",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "kVUwOUDVk"
+      },
       "editable": true,
       "error": false,
       "fill": 1,
@@ -263,7 +264,7 @@
         "alignAsTable": true,
         "avg": true,
         "current": true,
-        "max": false,
+        "max": true,
         "min": false,
         "rightSide": true,
         "show": true,
@@ -278,7 +279,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "8.2.2",
+      "pluginVersion": "9.2.4",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -288,6 +289,10 @@
       "steppedLine": false,
       "targets": [
         {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "kVUwOUDVk"
+          },
           "exemplar": true,
           "expr": "sort_desc(sum by (pod) (rate (container_network_receive_bytes_total{pod=\"$pod\"}[1m]) ))",
           "interval": "",
@@ -298,9 +303,7 @@
         }
       ],
       "thresholds": [],
-      "timeFrom": null,
       "timeRegions": [],
-      "timeShift": null,
       "title": "Network I/O",
       "tooltip": {
         "msResolution": true,
@@ -310,38 +313,29 @@
       },
       "type": "graph",
       "xaxis": {
-        "buckets": null,
         "mode": "time",
-        "name": null,
         "show": true,
         "values": []
       },
       "yaxes": [
         {
           "format": "bytes",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         },
         {
           "format": "short",
-          "label": null,
           "logBase": 1,
-          "max": null,
-          "min": null,
           "show": true
         }
       ],
       "yaxis": {
-        "align": false,
-        "alignLevel": null
+        "align": false
       }
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 31,
+  "schemaVersion": 37,
   "style": "dark",
   "tags": [
     "kubernetes"
@@ -352,13 +346,14 @@
         "allValue": ".*",
         "current": {
           "selected": false,
-          "text": "osm-edge-system",
-          "value": "osm-edge-system"
+          "text": "app",
+          "value": "app"
         },
-        "datasource": "Prometheus",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "kVUwOUDVk"
+        },
         "definition": "label_values(container_cpu_usage_seconds_total, namespace)",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "Namespace",
@@ -376,24 +371,24 @@
         "type": "query"
       },
       {
-        "allValue": null,
         "current": {
           "selected": false,
-          "text": "nginx",
-          "value": "nginx"
+          "text": "All",
+          "value": "$__all"
         },
-        "datasource": "Prometheus",
-        "definition": "label_values(container_cpu_usage_seconds_total{namespace=~\"$namespace\"}, pod)",
-        "description": null,
-        "error": null,
+        "datasource": {
+          "type": "prometheus",
+          "uid": "kVUwOUDVk"
+        },
+        "definition": "label_values(container_cpu_usage_seconds_total{namespace=~\"$namespace\",pod=~\"samples-api-gateway.*|samples-bookinfo-ratings.*|reviews.*|ratings.*|productpage.*|details.*|.*ingress.*|fortio.*\"}, pod)",
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Pod",
         "multi": false,
         "name": "pod",
         "options": [],
         "query": {
-          "query": "label_values(container_cpu_usage_seconds_total{namespace=~\"$namespace\"}, pod)",
+          "query": "label_values(container_cpu_usage_seconds_total{namespace=~\"$namespace\",pod=~\"samples-api-gateway.*|samples-bookinfo-ratings.*|reviews.*|ratings.*|productpage.*|details.*|.*ingress.*|fortio.*\"}, pod)",
           "refId": "StandardVariableQuery"
         },
         "refresh": 1,
@@ -409,10 +404,11 @@
           "text": "All",
           "value": "$__all"
         },
-        "datasource": "Prometheus",
+        "datasource": {
+          "type": "prometheus",
+          "uid": "kVUwOUDVk"
+        },
         "definition": "label_values(container_cpu_usage_seconds_total{namespace=\"$namespace\", pod=\"$pod\"}, container)",
-        "description": null,
-        "error": null,
         "hide": 0,
         "includeAll": true,
         "label": "Container",
@@ -432,7 +428,7 @@
     ]
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -463,5 +459,6 @@
   "timezone": "browser",
   "title": "Kubernetes Pods",
   "uid": "KTg8IIjnk",
-  "version": 8
+  "version": 12,
+  "weekStart": ""
 }

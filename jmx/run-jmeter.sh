@@ -18,6 +18,9 @@ case $DEMO_TYPE in
   4) echo "run benchmark for istio bookinfo";
     FULL_PATH=/productpage?u=test;
     ;;
+  5) echo "run benchmark for fortio"; 
+    FULL_PATH=/http-echo;
+    ;;    
 esac
 INGRESS_PORT=80
 HOST=$REMOTE_ADDR
@@ -46,7 +49,7 @@ if [[ -v FULL_PATH ]]; then
 fi
 # warming
 echo "warming up" 
-jmeter -Jthread.count="100" -Jthread.duration="30" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${FULL_PATH:-${SINGLE_PATH}}" -n -t jmx/bookinfo.jmx
+jmeter -Jthread.count="100" -Jthread.duration="30" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${FULL_PATH:-${SINGLE_PATH}}" -n -t jmx/benchmark.jmx
 
 # testing start
 if [[ -v SINGLE_PATH ]]; then
@@ -55,7 +58,7 @@ sleep $COOLDOWN_TIME
 echo "running on path: $SINGLE_PATH"
 ts=`date '+%Y-%m-%d-%H-%M-%S'`
 echo "start at $ts"
-jmeter -Jthread.count="${THREAD_COUNT}" -Jthread.duration="${DURATION}" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${SINGLE_PATH}" -n -t jmx/bookinfo.jmx -l "${RESULT_PATH}"/"${PREFIX}"-single-path-c"${THREAD_COUNT}"-d"${DURATION}"-"${ts}".jtl > "${RESULT_PATH}"/"${PREFIX}"-single-path-c"${THREAD_COUNT}"-d"${DURATION}"-"${ts}".summary
+jmeter -Jthread.count="${THREAD_COUNT}" -Jthread.duration="${DURATION}" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${SINGLE_PATH}" -n -t jmx/benchmark.jmx -l "${RESULT_PATH}"/"${PREFIX}"-single-path-c"${THREAD_COUNT}"-d"${DURATION}"-"${ts}".jtl > "${RESULT_PATH}"/"${PREFIX}"-single-path-c"${THREAD_COUNT}"-d"${DURATION}"-"${ts}".summary
 fi
 
 if [[ -v FULL_PATH ]]; then
@@ -64,5 +67,5 @@ sleep $COOLDOWN_TIME
 echo "running on path: $FULL_PATH"
 ts=`date '+%Y-%m-%d-%H-%M-%S'`
 echo "start at $ts"
-jmeter -Jthread.count="${THREAD_COUNT}" -Jthread.duration="${DURATION}" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${FULL_PATH}" -n -t jmx/bookinfo.jmx -l "${RESULT_PATH}"/"${PREFIX}"-full-path-c"${THREAD_COUNT}"-d"${DURATION}"-"${ts}".jtl > "${RESULT_PATH}"/"${PREFIX}"-full-path-c"${THREAD_COUNT}"-d"${DURATION}"-"${ts}".summary
+jmeter -Jthread.count="${THREAD_COUNT}" -Jthread.duration="${DURATION}" -Jhttp.host="${HOST}" -Jhttp.port="${INGRESS_PORT}" -Jhttp.path="${FULL_PATH}" -n -t jmx/benchmark.jmx -l "${RESULT_PATH}"/"${PREFIX}"-full-path-c"${THREAD_COUNT}"-d"${DURATION}"-"${ts}".jtl > "${RESULT_PATH}"/"${PREFIX}"-full-path-c"${THREAD_COUNT}"-d"${DURATION}"-"${ts}".summary
 fi

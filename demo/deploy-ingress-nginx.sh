@@ -14,6 +14,7 @@ REVIEWS_SERVICE="samples-bookinfo-reviews"
 RATINGS_SERVICE="samples-bookinfo-ratings"
 EMOJIVOTO_SERVICE="web-svc"
 PRODUCTPAGE_SERVICE="productpage"
+FORTIO_SERVICE="fortio"
 
 
 helm upgrade --install ingress-nginx ingress-nginx \
@@ -26,6 +27,27 @@ kubectl wait --namespace ingress-nginx \
   --selector=app.kubernetes.io/instance=ingress-nginx \
   --timeout=600s
 
+if [[ DEMO_TYPE -eq 5 ]]; then
+kubectl apply -f - <<EOF
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  namespace: $DEMO_NAMESPACE
+spec:
+  ingressClassName: nginx
+  rules:
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: $FORTIO_SERVICE
+            port:
+              number: 8080  
+EOF
+else
 kubectl apply -f - <<EOF
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -71,7 +93,7 @@ spec:
           service:
             name: $PRODUCTPAGE_SERVICE
             port:
-              number: 9080              
+              number: 9080                           
       - path: /
         pathType: Prefix
         backend:
@@ -80,5 +102,6 @@ spec:
             port:
               number: 10000
 EOF
+fi
 
 echo "ingress deployed"
