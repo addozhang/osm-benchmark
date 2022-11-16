@@ -43,6 +43,8 @@ spec:
       version: v1
   template:
     metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"    
       labels:
         app: details
         version: v1
@@ -96,6 +98,8 @@ spec:
       version: v1
   template:
     metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"
       labels:
         app: ratings
         version: v1
@@ -149,6 +153,8 @@ spec:
       version: v1
   template:
     metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"
       labels:
         app: reviews
         version: v1
@@ -215,6 +221,8 @@ spec:
       version: v1
   template:
     metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"
       labels:
         app: productpage
         version: v1

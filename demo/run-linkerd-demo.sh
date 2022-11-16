@@ -21,7 +21,7 @@ fi
 
 # install linkerd
 linkerd install --crds | kubectl apply -f -
-linkerd install --proxy-cpu-limit $CPU | kubectl apply -f -
+linkerd install | kubectl apply -f -
 
 sleep 5
 kubectl wait --namespace linkerd \

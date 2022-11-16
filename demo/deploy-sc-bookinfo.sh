@@ -187,6 +187,7 @@ spec:
       annotations:
         "app.flomesh.io/name": "samples-bookinfo-ratings"
         "app.flomesh.io/port": "8101"
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"        
       labels:
         app: samples-bookinfo-ratings
         type: app
@@ -440,6 +441,7 @@ spec:
       annotations:
         "app.flomesh.io/name": "samples-api-gateway"
         "app.flomesh.io/port": "10000"
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"        
       labels:
         app: samples-api-gateway
         type: infra

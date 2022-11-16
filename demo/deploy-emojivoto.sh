@@ -93,6 +93,8 @@ spec:
       version: v11
   template:
     metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"    
       labels:
         app: emoji-svc
         version: v11
@@ -132,6 +134,8 @@ spec:
       version: v11
   template:
     metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"    
       labels:
         app: vote-bot
         version: v11
@@ -165,6 +169,8 @@ spec:
       version: v11
   template:
     metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"    
       labels:
         app: voting-svc
         version: v11
@@ -204,6 +210,8 @@ spec:
       version: v11
   template:
     metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"    
       labels:
         app: web-svc
         version: v11

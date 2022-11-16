@@ -44,6 +44,8 @@ spec:
       type: app
   template:
     metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"
       labels:
         app: $SVC
         version: $VERSION
@@ -193,6 +195,8 @@ spec:
       type: app
   template:
     metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"
       labels:
         app: $SVC
         version: $VERSION

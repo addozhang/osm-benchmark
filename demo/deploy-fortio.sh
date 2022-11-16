@@ -28,6 +28,8 @@ spec:
       app: fortio
   template:
     metadata:
+      annotations:
+        config.linkerd.io/proxy-cpu-limit: "${CPU:-1}"
       labels:
         app: fortio
     spec:
